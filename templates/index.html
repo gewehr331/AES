@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .progress-bar-fill {
+            height: 20px;
+            width: 0;
+            background-color: #4caf50;
+            border-radius: 5px;
+            transition: width 0.3s;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        #toggle-container {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Криптоалгоритм AES</h1>
+    <form method="post">
+        <label for="input_text">Введите текст:</label><br>
+        <textarea id="input_text" name="input_text" rows="4" cols="50"></textarea><br><br>
+        
+        <label for="key">Введите ключ:</label><br>
+        <input type="text" id="key" name="key"><br><br>
+
+        <label for="key">Введите вектор инициализации (при необходимости) :</label><br>
+        <input type="text" id="iv" name="iv"><br><br>
+
+        <h1>Выберите опцию для отправки данных</h1>
+    <div id="toggle-container">
+        <label>
+            <input type="radio" name="toggle" value="encrypt_block" checked>
+            Зашифровать блок с первичным ключом
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="decrypt_block">
+            Расшифровать блок с первичным ключом
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="key_expansion">
+            Провести расширение ключа
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="encrypt">
+            Зашифровать блок с полным ключом
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="decrypt">
+            Расшифровать блок с полным ключом
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="encrypt_cbc">
+            Зашифровать текст (CBC)
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="decrypt_cbc">
+            Расшифровать текст (CBC)
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="encrypt_ecb">
+            Зашифровать текст (ECB)
+        </label>
+        <label>
+            <input type="radio" name="toggle" value="decrypt_ecb">
+            Расшифровать текст (ECB)
+        </label>
+    </div>
+    <button id="sendButton">Отправить</button>
+
+    </form>
+
+    <div class="result">
+
+       <div class="progress-bar">
+        <div class="progress-bar-fill" style="width: {{ progress }}%;"></div>
+    </div>
+
+    {% if result %}
+    <div class="result">
+        <strong>Результат:</strong><br>
+        {{ result }}
+    </div>
+    {% endif %}
+</html>
